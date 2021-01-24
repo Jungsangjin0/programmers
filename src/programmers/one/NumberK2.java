@@ -5,10 +5,13 @@ public class NumberK2 {
 	public static void main(String[] args) {
 		int[] arr = new int[] {1, 5, 2, 6, 3, 7, 4};
 		int[][] commands = new int[][] {{2, 5, 3},{4, 4, 1}, {1, 7, 3}};
+		
 		int[] a = sol(arr, commands);
-		for(int b : a) {
-			System.out.println(b);
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < a.length; i++) {
+			sb.append(a[i]).append(" ");
 		}
+		System.out.println(sb);
 	} 
 	public static int[] sol(int[] array, int[][] commands) {
 		int[] answer = new int[commands.length]; 
@@ -18,6 +21,7 @@ public class NumberK2 {
 		int b = 0;
 		int c = 0;
 		int d = 0;
+		
 		int[] temp;
 		for(int i = 0; i < commands.length; i++) {
 			a = commands[i][0];
@@ -29,7 +33,6 @@ public class NumberK2 {
 				temp[cnt] = array[j]; 
 				cnt++;
 			}
-			cnt = 0;
 			sort(temp, 0, temp.length - 1);
 			answer[d] = temp[c - 1];
 			d++;
@@ -37,12 +40,22 @@ public class NumberK2 {
 		return answer;
 	}
 
+	
+	
+	// 1, 5, 2, 6, 3, 7, 4
+	// 1, 2, 5, 6, 3, 7, 4
+	// 1, 2, 3, 4, 5, 7, 6
+	// 1, 2, 3, 4 
+// -1  0
+	// i = 0
+	//idx l = 0 r = 0
+	//idx 0 값을 있을 때
 	public static void sort(int[]arr, int l , int r) {
 
-		if(l < r) {
+		if(l < r) { //재귀함수 나올수 있게 해주는 조건문
 
+			//피벗 정해진 값의 대한 idx 값
 			int p = partition(arr, l, r);
-
 			sort(arr, l, p -1);
 			sort(arr, p + 1, r);
 		}
